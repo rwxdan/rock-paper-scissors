@@ -54,16 +54,17 @@ const playGame = () => {
 			)}`;
 			pScore.textContent = `Player score: ${playerScore}`;
 			compScore.textContent = `Computer score: ${computerScore}`;
-			if (playerScore == 5 || computerScore == 5) {
-				if (playerScore == 5) {
+			if (playerScore >= 5 || computerScore >= 5) {
+				if (playerScore >= 5) {
 					result.textContent = "You won the game!";
 					pScore.textContent = "";
 					compScore.textContent = "";
-				} else if (computerScore == 5) {
+				} else if (computerScore >= 5) {
 					result.textContent = "Computer won the game!";
 					pScore.textContent = "";
 					compScore.textContent = "";
 				}
+				return;
 			}
 		});
 	}
