@@ -1,4 +1,4 @@
-// Initialize score
+// Initialize score and rounds
 let playerScore = 0;
 let computerScore = 0;
 
@@ -34,23 +34,55 @@ function playRound(playerSelection, computerSelection) {
 	}
 }
 
-function getChoices() {
-	const playerChoice = prompt("Input: rock, paper or scissors").toLowerCase();
-	const computerChoice = getComputerChoice();
-	console.log(playRound(playerChoice, computerChoice));
+const container = document.getElementById("container");
+const result = document.createElement("p");
+container.appendChild(result);
+
+const pScore = document.createElement("p");
+container.appendChild(pScore);
+const compScore = document.createElement("p");
+container.appendChild(compScore);
+
+function play() {
+	document.getElementById("rock").addEventListener("click", () => {
+		if (playerScore == 5 || computerScore == 5) {
+			if (playerScore == 5) {
+				result.textContent = "You won the game!";
+			} else if (computerScore == 5) {
+				result.textContent = "Computer won the game!";
+			}
+		} else {
+			result.textContent = playRound("rock", getComputerChoice());
+			pScore.textContent = `Player score: ${playerScore}`;
+			compScore.textContent = `Computer score: ${computerScore}`;
+		}
+	});
+	document.getElementById("paper").addEventListener("click", () => {
+		if (playerScore == 5 || computerScore == 5) {
+			if (playerScore == 5) {
+				result.textContent = "You won the game!";
+			} else if (computerScore == 5) {
+				result.textContent = "Computer won the game!";
+			}
+		} else {
+			result.textContent = playRound("paper", getComputerChoice());
+			pScore.textContent = `Player score: ${playerScore}`;
+			compScore.textContent = `Computer score: ${computerScore}`;
+		}
+	});
+	document.getElementById("scissors").addEventListener("click", () => {
+		if (playerScore == 5 || computerScore == 5) {
+			if (playerScore == 5) {
+				result.textContent = "You won the game!";
+			} else if (computerScore == 5) {
+				result.textContent = "Computer won the game!";
+			}
+		} else {
+			result.textContent = playRound("scissors", getComputerChoice());
+			pScore.textContent = `Player score: ${playerScore}`;
+			compScore.textContent = `Computer score: ${computerScore}`;
+		}
+	});
 }
 
-// Repeat game for 5 rounds
-function game() {
-	for (let round = 0; round < 5; round++) getChoices();
-	// Get Counter and display winner
-	if (playerScore >= 3) {
-		console.log("You won the game!");
-	} else if (computerScore >= 3) {
-		console.log("Computer won the game! Better luck next time.");
-	} else {
-		console.log("Complete tie.");
-	}
-}
-
-game();
+play();
