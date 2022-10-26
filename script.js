@@ -37,52 +37,36 @@ function playRound(playerSelection, computerSelection) {
 const container = document.getElementById("container");
 const result = document.createElement("p");
 container.appendChild(result);
-
 const pScore = document.createElement("p");
 container.appendChild(pScore);
 const compScore = document.createElement("p");
 container.appendChild(compScore);
 
-function play() {
-	document.getElementById("rock").addEventListener("click", () => {
-		if (playerScore == 5 || computerScore == 5) {
-			if (playerScore == 5) {
-				result.textContent = "You won the game!";
-			} else if (computerScore == 5) {
-				result.textContent = "Computer won the game!";
-			}
-		} else {
-			result.textContent = playRound("rock", getComputerChoice());
+const playGame = () => {
+	let choices = document.querySelectorAll(".choice");
+	for (let item = 0; item < choices.length; item++) {
+		choices[item].addEventListener("click", () => {
+			const playerChoice = choices[item].id;
+			if (!playerChoice) return;
+			result.textContent = `Result: ${playRound(
+				playerChoice,
+				getComputerChoice()
+			)}`;
 			pScore.textContent = `Player score: ${playerScore}`;
 			compScore.textContent = `Computer score: ${computerScore}`;
-		}
-	});
-	document.getElementById("paper").addEventListener("click", () => {
-		if (playerScore == 5 || computerScore == 5) {
-			if (playerScore == 5) {
-				result.textContent = "You won the game!";
-			} else if (computerScore == 5) {
-				result.textContent = "Computer won the game!";
+			if (playerScore == 5 || computerScore == 5) {
+				if (playerScore == 5) {
+					result.textContent = "You won the game!";
+					pScore.textContent = "";
+					compScore.textContent = "";
+				} else if (computerScore == 5) {
+					result.textContent = "Computer won the game!";
+					pScore.textContent = "";
+					compScore.textContent = "";
+				}
 			}
-		} else {
-			result.textContent = playRound("paper", getComputerChoice());
-			pScore.textContent = `Player score: ${playerScore}`;
-			compScore.textContent = `Computer score: ${computerScore}`;
-		}
-	});
-	document.getElementById("scissors").addEventListener("click", () => {
-		if (playerScore == 5 || computerScore == 5) {
-			if (playerScore == 5) {
-				result.textContent = "You won the game!";
-			} else if (computerScore == 5) {
-				result.textContent = "Computer won the game!";
-			}
-		} else {
-			result.textContent = playRound("scissors", getComputerChoice());
-			pScore.textContent = `Player score: ${playerScore}`;
-			compScore.textContent = `Computer score: ${computerScore}`;
-		}
-	});
-}
+		});
+	}
+};
 
-play();
+playGame();
